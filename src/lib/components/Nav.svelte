@@ -3,4 +3,5 @@
     <a href="/login">Login</a>
     <a href="/register">Register</a>
     <a href="/profile">Profile</a>
+    <a href="/chat">Chat</a>
 </nav>

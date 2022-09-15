@@ -1,11 +1,10 @@
 <script lang="ts">
-    import {state} from '$lib/stores'
+    import { state } from "$lib/stores"
     let email: String
     let password: String
 
     const handleSubmit = async () => {
         try {
-            console.log(email, password)
             await state.login(email, password)
         } catch (error) {
             console.log(error)
