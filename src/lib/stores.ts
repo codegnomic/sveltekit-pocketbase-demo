@@ -11,7 +11,10 @@ function createStores () {
             state.init(userData) 
         },
         register: async (email, password, passwordConfirm) => {
-            let userData = await client.users.create({email, password, passwordConfirm})
+            await client.users.create({email, password, passwordConfirm})
+        },
+        registerAdmin: async(email, password, passwordConfirm) => {
+            await client.admins.create({email, password, passwordConfirm})
         },
         refresh: async () => {
             let userData = await client.users.refresh()

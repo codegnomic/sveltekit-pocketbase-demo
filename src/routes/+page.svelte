@@ -1,9 +1,7 @@
 <script>
     import Chatbox from "$lib/components/Chatbox.svelte"
-    import { state } from "$lib/stores"
-    $: console.log($state.user)
+
+    export let data
 </script>
 
-{$state?.user}
-
-<Chatbox />
+<Chatbox posts={data.posts.items} />
