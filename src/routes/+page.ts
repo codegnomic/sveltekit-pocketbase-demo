@@ -1,12 +1,11 @@
 import { client } from "$lib/db"
 
-export async function load({ data }) {
+export async function load() {
     let posts
     try {
         posts = await client.records.getList("posts", 1, 100, {
             expand: "user",
         })
-        console.log(posts)
     } catch (error) {
         console.log(error)
     }
