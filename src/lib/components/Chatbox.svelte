@@ -1,22 +1,33 @@
 <script lang="ts">
   import { client } from "$lib/db"
-  import { onMount, afterUpdate } from "svelte"
+  import { onMount, afterUpdate, onDestroy } from "svelte"
   import ChatInput from "./ChatInput.svelte"
 
   export let posts
+  export let room
   let chatbox
 
   async function fetchPosts() {
-    const postsData = await client.records.getList("posts", 1, 100, {
-      expand: "user",
-    })
-    posts = postsData.items
+    try {
+      const postsData = await client.records.getList("posts", 1, 100, {
+        expand: "user",
+        filter: `room = "${room.id}"`,
+      })
+      posts = postsData.items
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  onMount(() => {
-    client.realtime.subscribe("posts", function (e) {
-      fetchPosts()
-    })
+  onMount(async () => {
+    try {
+      await client.realtime.subscribe("posts", function (e) {
+        fetchPosts()
+      })
+    } catch (error) {
+      console.log(error)
+    }
+
     // chatbox.scrollTop = chatbox.scrollHeight
   })
 
@@ -34,7 +45,7 @@
   {/each}
 </div>
 
-<ChatInput />
+<ChatInput {room} />
 
 <style>
   .post-body {

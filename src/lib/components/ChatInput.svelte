@@ -5,6 +5,7 @@
   import { state } from "$lib/stores"
   import { client } from "$lib/db"
 
+  export let room
   let input = ""
   let showPicker = false
   let caretPosition = 0
@@ -38,6 +39,7 @@
       await client.records.create("posts", {
         user: $state.user.user.profile.id,
         body: input,
+        room: room.id,
       })
       input = ""
     } catch (error) {
