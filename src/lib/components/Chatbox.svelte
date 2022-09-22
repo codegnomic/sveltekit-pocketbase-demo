@@ -53,7 +53,8 @@
   }
   .chatbox {
     border: 1px solid black;
+    width: 100%;
     overflow: scroll;
-    height: 90vh;
+    height: 50vh;
   }
 </style>
